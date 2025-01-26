@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .game-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f6f9;
+            font-size: 2em;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cell:hover {
+            background-color: #e1e8f0;
+        }
+
+        .info {
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2ecc71;
+        }
+
+        .btn:active {
+            background-color: #28b463;
+        }
+
+        .reset-btn {
+            background-color: #e74c3c;
+        }
+
+        .reset-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="info">
+            <h2>Jogo da Velha</h2>
+            <p id="status">Jogador X, sua vez!</p>
+        </div>
+        <div class="board">
+            <div class="cell" onclick="makeMove(0)"></div>
+            <div class="cell" onclick="makeMove(1)"></div>
+            <div class="cell" onclick="makeMove(2)"></div>
+            <div class="cell" onclick="makeMove(3)"></div>
+            <div class="cell" onclick="makeMove(4)"></div>
+            <div class="cell" onclick="makeMove(5)"></div>
+            <div class="cell" onclick="makeMove(6)"></div>
+            <div class="cell" onclick="makeMove(7)"></div>
+            <div class="cell" onclick="makeMove(8)"></div>
+        </div>
+        <button class="btn reset-btn" onclick="resetGame()">Reiniciar Jogo</button>
+    </div>
+
+    <script>
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameOver = false;
+
+        function makeMove(index) {
+            if (board[index] !== '' || gameOver) return;
+
+            board[index] = currentPlayer;
+            document.querySelectorAll('.cell')[index].innerText = currentPlayer;
+
+            if (checkWinner()) {
+                document.getElementById('status').innerText = `Jogador ${currentPlayer} venceu!`;
+                gameOver = true;
+            } else if (board.every(cell => cell !== '')) {
+                document.getElementById('status').innerText = 'Empate!';
+                gameOver = true;
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                document.getElementById('status').innerText = `Jogador ${currentPlayer}, sua vez!`;
+            }
+        }
+
+        function checkWinner() {
+            const winPatterns = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+
+            return winPatterns.some(pattern => {
+                const [a, b, c] = pattern;
+                return board[a] !== '' && board[a] === board[b] && board[a] === board[c];
+            });
+        }
+
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            gameOver = false;
+            document.getElementById('status').innerText = `Jogador ${currentPlayer}, sua vez!`;
+            document.querySelectorAll('.cell').forEach(cell => cell.innerText = '');
+        }
+    </script>
+</body>
+</html>
