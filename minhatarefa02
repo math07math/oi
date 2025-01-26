@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Responsivo</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo do body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef6fc;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Estilo do container principal */
+        .container {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Botão */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #4a90e2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: #357ab8;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Layout Responsivo</h1>
+        <p>
+            Para minha atividade
+           
+        </p>
+        <a href="https://www.w3schools.com/" class="button" target="_blank">Aprenda HTML</a>
+        <footer>
+            <p>Desenvolvido como parte do curso de desenvolvimento WEB.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
